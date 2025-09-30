@@ -1,0 +1,16 @@
+PS C:\Users\linzh> & C:/python/python.exe c:/Users/linzh/Desktop/project_code/Final_version/bl_test_timeout.py
+Port opened: COM3
+[TX] 55 00 00 01 01
+[RX] 79
+PING: OK
+[TX] 55 07 00 02 00 00 48 65 6C 6C 6F 40
+[RX] 79
+WRITE: OK
+[TX] 55 04 00 03 00 00 05 00 06
+[RX] first byte: 55
+[RX] len=5, cmd=0x03, data=48 65 6C 6C 6F, crc=0x41
+READ : b'Hello'
+BIN exists? True
+[TX] 55 00 00 10 10
+ERROR: read 0/1 bytes
+提示: 确认板子已进入 Bootloader，串口号正确，波特率 115200，且未被其他程序占用。
