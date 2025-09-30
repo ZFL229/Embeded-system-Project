@@ -19,3 +19,15 @@
   set FORCE_BAD_CRC=1
   python bl_test.py --port COM3 --bin AppProject_bad.bin > logs/log_bad.txt 2>&1
 
+### bl_test_timeout.py
+- **Purpose**:
+  A modified version of bl_test.py used specifically for the Timeout Test.
+  
+- **Functions**:
+- Runs the same upgrade flow as bl_test.py but with artificially short UART timeouts (e.g., 5 ms).
+- Intentionally triggers timeout errors during erase/write/CRC steps.
+- Verifies that the bootloader does not write the valid-flag and remains in boot mode when communication is unreliable.
+- Confirms that the system can be recovered by rerunning bl_test.py with normal settings.
+
+- **Usage**:
+- python bl_test_timeout.py --port COM3 --bin AppProject.bin > logs/log_timeout.txt 2>&1
