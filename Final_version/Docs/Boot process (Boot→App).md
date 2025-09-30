@@ -41,6 +41,6 @@
 ```mermaid
 flowchart TD
     A[Power-on / Reset] --> B[Boot]
-    B -- Check conditions --> C[Stay in Boot (waiting for commands)]
+    B -- Check conditions --> C[Stay in Boot: waiting for commands]
     B --> D[Conditions passed + CRC valid]
     D --> E[Jump to App]
