@@ -1,4 +1,4 @@
-# STM32F401RE Memory Layout and Valid Flag
+# STM32F401RE Memory Layout, Valid Flag, and Boot Process
 
 ## Chip Information
 - **Model**: STM32F401RE  
@@ -18,3 +18,29 @@
   - The flag is written only if the CRC check passes.  
   - In abnormal situations (NACK / timeout / interruption), the flag is **not** written.  
 
+---
+
+# Boot Process (Boot → App)
+
+## Flow Steps
+1. **Power-on / Reset** → Bootloader runs.  
+2. Check Boot entry conditions:  
+   - Button pressed.  
+   - Valid flag not present.  
+   - CRC check failed.  
+   - Host command request.  
+3. If any condition is met → Stay in Boot and wait for commands.  
+4. Otherwise → Disable peripherals and interrupts → Set VTOR → Jump to App.  
+
+## Rollback Mechanism
+- **CRC failure** → Boot stops, no jump to App.  
+- **Transfer interruption / timeout** → Valid flag is not written, so Boot allows upgrade at next power-on.  
+- **Abnormal cases** → Ensure device never runs a corrupted image.  
+
+## State Diagram
+```mermaid
+flowchart TD
+    A[Power-on / Reset] --> B[Boot]
+    B -- Check conditions --> C[Stay in Boot (waiting for commands)]
+    B --> D[Conditions passed + CRC valid]
+    D --> E[Jump to App]
