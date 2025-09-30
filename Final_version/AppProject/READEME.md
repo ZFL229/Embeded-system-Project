@@ -1,1 +1,3 @@
-
+- **AppProject**  
+  - User application project  
+  - Features: LED control, UART communication, interaction with Bootloader
